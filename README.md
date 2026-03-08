@@ -20,7 +20,7 @@ A CLI tool to manage multiple GitHub accounts for batch operations like starring
 
 ```bash
 # Clone the repository
-git clone https://github.com/yourusername/GithubHacker.git
+git clone https://github.com/SSBun/GithubHacker.git
 cd GithubHacker
 
 # Create virtual environment

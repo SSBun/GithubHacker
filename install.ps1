@@ -2,7 +2,7 @@
 # Usage: iwr -useb https://raw.githubusercontent.com/YOUR_USERNAME/GithubHacker/main/install.ps1 | iex
 
 param(
-    [string]$Repo = "YOUR_USERNAME/GithubHacker",
+    [string]$Repo = "SSBun/GithubHacker",
     [string]$InstallDir = "$env:USERPROFILE\.github-hacker"
 )
 

@@ -31,4 +31,4 @@ dependencies = [
 github-hacker = "githubhacker.cli:app"
 
 [project.urls]
-Homepage = "https://github.com/yourusername/GithubHacker"
+Homepage = "https://github.com/SSBun/GithubHacker"

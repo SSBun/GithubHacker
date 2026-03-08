@@ -4,7 +4,7 @@
 
 set -e
 
-REPO="YOUR_USERNAME/GithubHacker"
+REPO="SSBun/GithubHacker"
 INSTALL_DIR="${HOME}/.github-hacker"
 BIN_DIR="${HOME}/.local/bin"
 

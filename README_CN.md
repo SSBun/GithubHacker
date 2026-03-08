@@ -20,7 +20,7 @@
 
 ```bash
 # 克隆仓库
-git clone https://github.com/yourusername/GithubHacker.git
+git clone https://github.com/SSBun/GithubHacker.git
 cd GithubHacker
 
 # 创建虚拟环境
