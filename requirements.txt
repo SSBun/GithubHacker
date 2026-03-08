@@ -1,0 +1,4 @@
+typer>=0.9.0
+pygithub>=2.0.0
+keyring>=23.0.0
+rich>=13.0.0
