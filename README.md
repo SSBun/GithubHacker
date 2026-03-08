@@ -16,6 +16,8 @@ A CLI tool to manage multiple GitHub accounts for batch operations like starring
 
 ## Installation
 
+### Option 1: Install from source (recommended for development)
+
 ```bash
 # Clone the repository
 git clone https://github.com/yourusername/GithubHacker.git
@@ -30,8 +32,23 @@ source venv/bin/activate
 # On Windows:
 venv\Scripts\activate
 
-# Install dependencies
+# Install in development mode
+pip install -e .
+
+# Or install dependencies only
 pip install -r requirements.txt
+```
+
+### Option 2: Install as package (when published to PyPI)
+
+```bash
+pip install github-hacker
+```
+
+After installation, use the `github-hacker` command directly:
+
+```bash
+github-hacker --help
 ```
 
 ## Quick Start

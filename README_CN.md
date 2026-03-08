@@ -16,6 +16,8 @@
 
 ## 安装
 
+### 方式一：从源码安装（推荐开发使用）
+
 ```bash
 # 克隆仓库
 git clone https://github.com/yourusername/GithubHacker.git
@@ -30,8 +32,23 @@ source venv/bin/activate
 # Windows:
 venv\Scripts\activate
 
-# 安装依赖
+# 以开发模式安装
+pip install -e .
+
+# 或者仅安装依赖
 pip install -r requirements.txt
+```
+
+### 方式二：使用 pip 安装（发布到 PyPI 后）
+
+```bash
+pip install github-hacker
+```
+
+安装后，可以直接使用 `github-hacker` 命令：
+
+```bash
+github-hacker --help
 ```
 
 ## 快速开始
