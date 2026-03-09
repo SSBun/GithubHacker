@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{% if page.title %}{{ page.title }} | {% endif %}{{ site.title }}</title>
+  <meta name="description" content="{{ site.description }}">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    :root {
+      --primary-color: #24292f;
+      --accent-color: #0969da;
+      --bg-color: #f6f8fa;
+    }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+      background-color: var(--bg-color);
+    }
+    .navbar {
+      background-color: var(--primary-color);
+    }
+    .hero {
+      background: linear-gradient(135deg, var(--primary-color) 0%, #1a1f24 100%);
+      color: white;
+      padding: 80px 0;
+      text-align: center;
+    }
+    .hero h1 {
+      font-size: 3rem;
+      font-weight: 700;
+    }
+    .hero p {
+      font-size: 1.25rem;
+      opacity: 0.9;
+    }
+    .feature-card {
+      background: white;
+      border-radius: 8px;
+      padding: 24px;
+      margin-bottom: 24px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .feature-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    }
+    .feature-icon {
+      font-size: 2rem;
+      color: var(--accent-color);
+      margin-bottom: 16px;
+    }
+    .command-block {
+      background: #1e1e1e;
+      color: #d4d4d4;
+      border-radius: 6px;
+      padding: 16px;
+      font-family: "SF Mono", Monaco, Consolas, monospace;
+      font-size: 0.9rem;
+      overflow-x: auto;
+    }
+    .command-block .prompt {
+      color: #6a9955;
+    }
+    .command-block .comment {
+      color: #6a9955;
+    }
+    .command-block .string {
+      color: #ce9178;
+    }
+    footer {
+      background: var(--primary-color);
+      color: white;
+      padding: 40px 0;
+      margin-top: 60px;
+    }
+    .badge-install {
+      background: #28a745;
+      color: white;
+      padding: 8px 16px;
+      border-radius: 20px;
+      font-weight: 600;
+    }
+    .terminal-window {
+      background: #0d1117;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+    }
+    .terminal-header {
+      background: #161b22;
+      padding: 12px 16px;
+      display: flex;
+      gap: 8px;
+    }
+    .terminal-dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+    }
+    .terminal-dot.red { background: #ff5f56; }
+    .terminal-dot.yellow { background: #ffbd2e; }
+    .terminal-dot.green { background: #27c93f; }
+    .terminal-body {
+      padding: 16px;
+      font-family: "SF Mono", Monaco, Consolas, monospace;
+      font-size: 0.85rem;
+      color: #c9d1d9;
+    }
+  </style>
+</head>
+<body>
+  <nav class="navbar navbar-expand-lg navbar-dark">
+    <div class="container">
+      <a class="navbar-brand" href="/">
+        <i class="fab fa-github me-2"></i>GitHub Hacker
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="#features">Features</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#installation">Installation</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#usage">Usage</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="https://github.com/SSBun/GithubHacker" target="_blank">
+              <i class="fab fa-github"></i> GitHub
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  {{ content }}
+
+  <footer>
+    <div class="container text-center">
+      <p class="mb-2">
+        <i class="fab fa-github me-2"></i>GitHub Hacker - Manage multiple GitHub accounts
+      </p>
+      <p class="mb-0">
+        <small>MIT License &bull; Open Source on <a href="https://github.com/SSBun/GithubHacker" style="color: #8b949e;">GitHub</a></small>
+      </p>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
