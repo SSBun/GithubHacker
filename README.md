@@ -2,6 +2,8 @@
 
 A CLI tool to manage multiple GitHub accounts for batch operations like starring, watching, and forking repositories.
 
+**Official Website**: https://ssbun.github.io/GithubHacker
+
 ## Features
 
 - **Multi-account Management**: Login, logout, and manage multiple GitHub accounts

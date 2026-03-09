@@ -2,6 +2,8 @@
 
 一个 CLI 工具，用于管理多个 GitHub 账户，执行批量操作如 star、watch、fork 等。
 
+**官方网站**: https://ssbun.github.io/GithubHacker
+
 ## 功能特性
 
 - **多账户管理**：登录、登出、管理多个 GitHub 账户
