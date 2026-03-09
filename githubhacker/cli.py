@@ -10,12 +10,22 @@ from rich.progress import Progress, SpinnerColumn, TextColumn, BarColumn, TaskPr
 
 from . import account_manager, storage
 from .account_manager import parse_repo
+from . import __version__
 
 console = Console()
 
 # Create config subcommand group
 config_app = typer.Typer(help="Manage account configuration")
-app = typer.Typer(help="GitHub Hacker - Manage multiple GitHub accounts")
+app = typer.Typer(
+    help="GitHub Hacker - Manage multiple GitHub accounts",
+)
+app.add_typer(config_app, name="config")
+
+
+def version_callback(value: bool):
+    if value:
+        console.print(f"github-hacker version [bold]{__version__}[/bold]")
+        raise typer.Exit()
 
 
 @app.command()
@@ -232,6 +242,14 @@ def config_validate():
     except ValueError as e:
         console.print(f"[red]Error:[/red] {e}")
         raise typer.Exit(1)
+
+
+# Add version option
+@app.callback()
+def main_callback(
+    version: bool = typer.Option(None, "--version", help="Show version information", is_eager=True, callback=version_callback),
+):
+    pass
 
 
 # Register config as a subcommand
