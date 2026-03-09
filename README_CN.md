@@ -16,7 +16,13 @@
 
 ## 安装
 
-### 方式一：从源码安装（推荐开发使用）
+### 方式一：使用 pip 安装（推荐）
+
+```bash
+pip install github-hacker
+```
+
+### 方式二：从源码安装（开发使用）
 
 ```bash
 # 克隆仓库
@@ -34,15 +40,6 @@ venv\Scripts\activate
 
 # 以开发模式安装
 pip install -e .
-
-# 或者仅安装依赖
-pip install -r requirements.txt
-```
-
-### 方式二：使用 pip 安装（发布到 PyPI 后）
-
-```bash
-pip install github-hacker
 ```
 
 安装后，可以直接使用 `github-hacker` 命令：
@@ -56,27 +53,27 @@ github-hacker --help
 ### 登录 GitHub 账户
 
 ```bash
-python main.py login myaccount YOUR_GITHUB_TOKEN
+github-hacker login myaccount YOUR_GITHUB_TOKEN
 ```
 
 ### 查看账户列表
 
 ```bash
-python main.py config list
+github-hacker config list
 ```
 
 ### Star 仓库（所有账户）
 
 ```bash
-python main.py star owner/repo
+github-hacker star owner/repo
 # 或使用完整 URL
-python main.py star https://github.com/owner/repo
+github-hacker star https://github.com/owner/repo
 ```
 
 ### 使用指定账户 Star
 
 ```bash
-python main.py star owner/repo -a myaccount
+github-hacker star owner/repo -a myaccount
 ```
 
 ## 命令说明
@@ -85,51 +82,51 @@ python main.py star owner/repo -a myaccount
 
 ```bash
 # 添加账户
-python main.py login <名称> <令牌>
+github-hacker login <名称> <令牌>
 
 # 移除账户
-python main.py logout <名称>
+github-hacker logout <名称>
 
 # 列出账户
-python main.py config list
+github-hacker config list
 
 # 导出账户到 JSON
-python main.py config export accounts.json
+github-hacker config export accounts.json
 
 # 从 JSON 导入账户
-python main.py config import accounts.json
+github-hacker config import accounts.json
 
 # 验证所有令牌
-python main.py config validate
+github-hacker config validate
 
 # 显示账户信息
-python main.py config whoami
+github-hacker config whoami
 ```
 
 ### 仓库操作
 
 ```bash
 # Star 仓库
-python main.py star <仓库>
-python main.py star <仓库> -a <账户>
+github-hacker star <仓库>
+github-hacker star <仓库> -a <账户>
 
 # Unstar 仓库
-python main.py unstar <仓库>
+github-hacker unstar <仓库>
 
 # Watch 仓库（接收通知）
-python main.py watch <仓库>
+github-hacker watch <仓库>
 
 # Unwatch 仓库
-python main.py unwatch <仓库>
+github-hacker unwatch <仓库>
 
 # Fork 仓库
-python main.py fork <仓库>
+github-hacker fork <仓库>
 
 # 查看状态（starred/watched）
-python main.py status <仓库>
+github-hacker status <仓库>
 
 # 查看仓库信息
-python main.py info <仓库>
+github-hacker info <仓库>
 ```
 
 ## 支持的仓库格式

@@ -16,7 +16,13 @@ A CLI tool to manage multiple GitHub accounts for batch operations like starring
 
 ## Installation
 
-### Option 1: Install from source (recommended for development)
+### Option 1: Install with pip (recommended)
+
+```bash
+pip install github-hacker
+```
+
+### Option 2: Install from source (for development)
 
 ```bash
 # Clone the repository
@@ -34,18 +40,9 @@ venv\Scripts\activate
 
 # Install in development mode
 pip install -e .
-
-# Or install dependencies only
-pip install -r requirements.txt
 ```
 
-### Option 2: Install as package (when published to PyPI)
-
-```bash
-pip install github-hacker
-```
-
-After installation, use the `github-hacker` command directly:
+After installation, use the `github-hacker` command:
 
 ```bash
 github-hacker --help
@@ -56,27 +53,27 @@ github-hacker --help
 ### Login with GitHub Account
 
 ```bash
-python main.py login myaccount YOUR_GITHUB_TOKEN
+github-hacker login myaccount YOUR_GITHUB_TOKEN
 ```
 
 ### List Accounts
 
 ```bash
-python main.py config list
+github-hacker config list
 ```
 
 ### Star a Repository (All Accounts)
 
 ```bash
-python main.py star owner/repo
+github-hacker star owner/repo
 # Or use full URL
-python main.py star https://github.com/owner/repo
+github-hacker star https://github.com/owner/repo
 ```
 
 ### Star with Specific Account
 
 ```bash
-python main.py star owner/repo -a myaccount
+github-hacker star owner/repo -a myaccount
 ```
 
 ## Commands
@@ -85,51 +82,51 @@ python main.py star owner/repo -a myaccount
 
 ```bash
 # Add account
-python main.py login <name> <token>
+github-hacker login <name> <token>
 
 # Remove account
-python main.py logout <name>
+github-hacker logout <name>
 
 # List accounts
-python main.py config list
+github-hacker config list
 
 # Export accounts to JSON
-python main.py config export accounts.json
+github-hacker config export accounts.json
 
 # Import accounts from JSON
-python main.py config import accounts.json
+github-hacker config import accounts.json
 
 # Validate all tokens
-python main.py config validate
+github-hacker config validate
 
 # Show account info
-python main.py config whoami
+github-hacker config whoami
 ```
 
 ### Repository Operations
 
 ```bash
 # Star a repository
-python main.py star <repo>
-python main.py star <repo> -a <account>
+github-hacker star <repo>
+github-hacker star <repo> -a <account>
 
 # Unstar a repository
-python main.py unstar <repo>
+github-hacker unstar <repo>
 
 # Watch a repository (notifications)
-python main.py watch <repo>
+github-hacker watch <repo>
 
 # Unwatch a repository
-python main.py unwatch <repo>
+github-hacker unwatch <repo>
 
 # Fork a repository
-python main.py fork <repo>
+github-hacker fork <repo>
 
 # Check status (starred/watched)
-python main.py status <repo>
+github-hacker status <repo>
 
 # Show repository info
-python main.py info <repo>
+github-hacker info <repo>
 ```
 
 ## Supported Repository Formats
