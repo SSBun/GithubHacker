@@ -636,13 +636,14 @@ def main():
     except click.exceptions.UsageError as e:
         # No command provided - show help
         if "Missing command" in e.format_message():
-            # Reinvoke with --help to show help
-            original_argv = sys.argv
-            sys.argv = ["github-hacker", "--help"]
-            try:
-                app(standalone_mode=False)
-            finally:
-                sys.argv = original_argv
+            # Call the app with --help to show help
+            import subprocess
+            result = subprocess.run(
+                [sys.executable, "-m", "githubhacker.cli", "--help"],
+                capture_output=True, text=True
+            )
+            console.print(result.stdout)
+            sys.exit(0)
         else:
             console.print(f"[red]Error:[/red] {e.format_message()}")
     except click.exceptions.MissingParameter as e:
