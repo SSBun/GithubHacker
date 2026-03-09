@@ -633,6 +633,18 @@ def info(
 def main():
     try:
         app(standalone_mode=False)
+    except click.exceptions.UsageError as e:
+        # No command provided - show help
+        if "Missing command" in e.format_message():
+            # Reinvoke with --help to show help
+            original_argv = sys.argv
+            sys.argv = ["github-hacker", "--help"]
+            try:
+                app(standalone_mode=False)
+            finally:
+                sys.argv = original_argv
+        else:
+            console.print(f"[red]Error:[/red] {e.format_message()}")
     except click.exceptions.MissingParameter as e:
         console.print(f"[red]Error:[/red] {e.format_message()}")
         # Show help for the command that was invoked
