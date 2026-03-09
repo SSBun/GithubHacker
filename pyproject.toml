@@ -9,7 +9,7 @@ description = "CLI tool to manage multiple GitHub accounts for batch operations"
 readme = "README.md"
 requires-python = ">=3.9"
 authors = [
-    {name = "Your Name", email = "you@example.com"}
+    {name = "SSBun", email = "ssbun.github@gmail.com"}
 ]
 classifiers = [
     "Development Status :: 3 - Alpha",
