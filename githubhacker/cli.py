@@ -633,6 +633,15 @@ def info(
 def main():
     try:
         app(standalone_mode=False)
+    except click.exceptions.MissingParameter as e:
+        console.print(f"[red]Error:[/red] {e.format_message()}")
+        # Show help for the command that was invoked
+        if e.ctx:
+            console.print()
+            with console.capture() as capture:
+                console.print(e.ctx.get_help())
+            console.print(capture.get())
+        console.print("\n[dim]Run with --help for more information.[/dim]")
     except click.exceptions.ClickException as e:
         console.print(f"[red]Error:[/red] {e.format_message()}")
         console.print("\n[bold cyan]Examples:[/bold cyan]")
