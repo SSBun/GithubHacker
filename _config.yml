@@ -1,0 +1,21 @@
+title: GitHub Hacker
+description: CLI tool to manage multiple GitHub accounts for batch operations like starring, watching, and forking repositories.
+baseurl: ""
+url: "https://ssbun.github.io"
+
+# Build settings
+markdown: kramdown
+plugins:
+  - jekyll-feed
+  - jekyll-seo-tag
+
+# Social links
+github: SSBun/GithubHacker
+
+# Exclude unnecessary files
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - node_modules
+  - vendor/
+  - .git/

@@ -1,0 +1,202 @@
+---
+layout: default
+title: Home
+---
+
+<div class="hero">
+  <div class="container">
+    <h1><i class="fab fa-github me-3"></i>GitHub Hacker</h1>
+    <p class="lead mb-4">A powerful CLI tool to manage multiple GitHub accounts for batch operations</p>
+    <p class="mb-4">
+      <span class="badge-install">
+        <i class="fas fa-download me-2"></i>pip install github-hacker
+      </span>
+    </p>
+    <p class="mb-0">
+      <a href="https://pypi.org/project/github-hacker/" target="_blank">
+        <img src="https://img.shields.io/pypi/v/github-hacker.svg" alt="PyPI version">
+      </a>
+      <a href="https://pypi.org/project/github-hacker/" target="_blank">
+        <img src="https://img.shields.io/pypi/pyversions/github-hacker.svg" alt="Python versions">
+      </a>
+      <a href="https://github.com/SSBun/GithubHacker/blob/main/LICENSE" target="_blank">
+        <img src="https://img.shields.io/pypi/l/github-hacker.svg" alt="License">
+      </a>
+    </p>
+  </div>
+</div>
+
+<div class="container my-5">
+  <section id="features" class="mb-5">
+    <h2 class="text-center mb-4"><i class="fas fa-star me-2"></i>Features</h2>
+    <div class="row">
+      <div class="col-md-4">
+        <div class="feature-card">
+          <div class="feature-icon"><i class="fas fa-users"></i></div>
+          <h4>Multi-Account Management</h4>
+          <p class="text-muted mb-0">Login, logout, and manage multiple GitHub accounts with ease.</p>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="feature-card">
+          <div class="feature-icon"><i class="fas fa-bolt"></i></div>
+          <h4>Batch Operations</h4>
+          <p class="text-muted mb-0">Perform operations with all accounts at once - star, watch, fork repositories.</p>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="feature-card">
+          <div class="feature-icon"><i class="fas fa-download"></i></div>
+          <h4>Easy Installation</h4>
+          <p class="text-muted mb-0">Install via pip, pipx, or build from source. Works on all platforms.</p>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="feature-card">
+          <div class="feature-icon"><i class="fas fa-heart"></i></div>
+          <h4>Star/Unstar</h4>
+          <p class="text-muted mb-0">Star or unstar repositories with one or all accounts.</p>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="feature-card">
+          <div class="feature-icon"><i class="fas fa-eye"></i></div>
+          <h4>Watch/Unwatch</h4>
+          <p class="text-muted mb-0">Subscribe or unsubscribe from repository notifications.</p>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="feature-card">
+          <div class="feature-icon"><i class="fas fa-code-branch"></i></div>
+          <h4>Fork</h4>
+          <p class="text-muted mb-0">Fork repositories to all your accounts instantly.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="installation" class="mb-5">
+    <h2 class="text-center mb-4"><i class="fas fa-download me-2"></i>Installation</h2>
+
+    <div class="row justify-content-center">
+      <div class="col-lg-8">
+        <div class="mb-4">
+          <h4><i class="fab fa-pypi me-2"></i>Install with pip (Recommended)</h4>
+          <div class="command-block mt-3">
+            <span class="prompt">$</span> pip install github-hacker
+          </div>
+        </div>
+
+        <div class="mb-4">
+          <h4><i class="fas fa-box me-2"></i>Install with pipx</h4>
+          <div class="command-block mt-3">
+            <span class="prompt">$</span> pipx install github-hacker
+          </div>
+        </div>
+
+        <div class="mb-4">
+          <h4><i class="fab fa-github me-2"></i>Install from source</h4>
+          <div class="command-block mt-3">
+            <span class="prompt">$</span> git clone https://github.com/SSBun/GithubHacker.git<br>
+            <span class="prompt">$</span> cd GithubHacker<br>
+            <span class="prompt">$</span> pip install -e .
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="usage" class="mb-5">
+    <h2 class="text-center mb-4"><i class="fas fa-terminal me-2"></i>Quick Start</h2>
+
+    <div class="row justify-content-center">
+      <div class="col-lg-8">
+        <div class="mb-4">
+          <h4>Login with GitHub Account</h4>
+          <div class="command-block mt-3">
+            <span class="prompt">$</span> github-hacker login <span class="string">myaccount</span> <span class="string">YOUR_GITHUB_TOKEN</span>
+          </div>
+        </div>
+
+        <div class="mb-4">
+          <h4>List Accounts</h4>
+          <div class="command-block mt-3">
+            <span class="prompt">$</span> github-hacker config list
+          </div>
+        </div>
+
+        <div class="mb-4">
+          <h4>Star a Repository (All Accounts)</h4>
+          <div class="command-block mt-3">
+            <span class="prompt">$</span> github-hacker star <span class="string">owner/repo</span><br>
+            <span class="comment"># Or use full URL</span><br>
+            <span class="prompt">$</span> github-hacker star <span class="string">https://github.com/owner/repo</span>
+          </div>
+        </div>
+
+        <div class="mb-4">
+          <h4>Star with Specific Account</h4>
+          <div class="command-block mt-3">
+            <span class="prompt">$</span> github-hacker star <span class="string">owner/repo</span> -a <span class="string">myaccount</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="commands" class="mb-5">
+    <h2 class="text-center mb-4"><i class="fas fa-list me-2"></i>All Commands</h2>
+
+    <div class="row justify-content-center">
+      <div class="col-lg-8">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">Account Management</h5>
+            <div class="command-block mt-2">
+              <span class="comment"># Add account</span><br>
+              github-hacker login &lt;name&gt; &lt;token&gt;<br><br>
+              <span class="comment"># Remove account</span><br>
+              github-hacker logout &lt;name&gt;<br><br>
+              <span class="comment"># List accounts</span><br>
+              github-hacker config list<br><br>
+              <span class="comment"># Export accounts</span><br>
+              github-hacker config export accounts.json<br><br>
+              <span class="comment"># Import accounts</span><br>
+              github-hacker config import accounts.json
+            </div>
+          </div>
+        </div>
+
+        <div class="card mt-4">
+          <div class="card-body">
+            <h5 class="card-title">Repository Operations</h5>
+            <div class="command-block mt-2">
+              <span class="comment"># Star a repository</span><br>
+              github-hacker star &lt;repo&gt;<br><br>
+              <span class="comment"># Unstar a repository</span><br>
+              github-hacker unstar &lt;repo&gt;<br><br>
+              <span class="comment"># Watch a repository</span><br>
+              github-hacker watch &lt;repo&gt;<br><br>
+              <span class="comment"># Unwatch a repository</span><br>
+              github-hacker unwatch &lt;repo&gt;<br><br>
+              <span class="comment"># Fork a repository</span><br>
+              github-hacker fork &lt;repo&gt;<br><br>
+              <span class="comment"># Check status</span><br>
+              github-hacker status &lt;repo&gt;<br><br>
+              <span class="comment"># Show repository info</span><br>
+              github-hacker info &lt;repo&gt;
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="text-center mb-5">
+    <h2 class="mb-4"><i class="fas fa-rocket me-2"></i>Get Started Now</h2>
+    <p class="lead text-muted mb-4">Install GitHub Hacker and manage multiple GitHub accounts with ease.</p>
+    <div class="command-block d-inline-block">
+      <span class="prompt">$</span> pip install github-hacker
+    </div>
+  </section>
+</div>
