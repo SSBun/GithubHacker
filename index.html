@@ -1,202 +1,886 @@
----
-layout: default
-title: Home
----
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{% if page.title %}{{ page.title }} | {% endif %}{{ site.title }}</title>
+  <meta name="description" content="{{ site.description }}">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <style>
+    :root {
+      --bg-dark: #0d1117;
+      --bg-card: #161b22;
+      --bg-hover: #21262d;
+      --border: #30363d;
+      --text-primary: #f0f6fc;
+      --text-secondary: #8b949e;
+      --text-muted: #6e7681;
+      --accent-blue: #58a6ff;
+      --accent-green: #3fb950;
+      --accent-purple: #a371f7;
+      --accent-orange: #f0883e;
+      --accent-pink: #db61a2;
+    }
 
-<div class="hero">
-  <div class="container">
-    <h1><i class="fab fa-github me-3"></i>GitHub Hacker</h1>
-    <p class="lead mb-4">A powerful CLI tool to manage multiple GitHub accounts for batch operations</p>
-    <p class="mb-4">
-      <span class="badge-install">
-        <i class="fas fa-download me-2"></i>pip install github-hacker
-      </span>
-    </p>
-    <p class="mb-0">
-      <a href="https://pypi.org/project/github-hacker/" target="_blank">
-        <img src="https://img.shields.io/pypi/v/github-hacker.svg" alt="PyPI version">
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: var(--bg-dark);
+      color: var(--text-primary);
+      line-height: 1.6;
+      min-height: 100vh;
+    }
+
+    /* Animated background */
+    .bg-animation {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      z-index: -1;
+    }
+
+    .bg-animation::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background:
+        radial-gradient(ellipse at 20% 20%, rgba(88, 166, 255, 0.08) 0%, transparent 50%),
+        radial-gradient(ellipse at 80% 80%, rgba(163, 113, 247, 0.08) 0%, transparent 50%),
+        radial-gradient(ellipse at 40% 60%, rgba(63, 185, 80, 0.05) 0%, transparent 40%);
+      animation: bgPulse 15s ease-in-out infinite;
+    }
+
+    @keyframes bgPulse {
+      0%, 100% { transform: translate(0, 0) rotate(0deg); }
+      33% { transform: translate(2%, 2%) rotate(1deg); }
+      66% { transform: translate(-1%, 1%) rotate(-1deg); }
+    }
+
+    /* Navigation */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      background: rgba(13, 17, 23, 0.8);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      z-index: 1000;
+      padding: 1rem 0;
+    }
+
+    .nav-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      font-size: 1.25rem;
+      font-weight: 600;
+      color: var(--text-primary);
+      text-decoration: none;
+    }
+
+    .logo-icon {
+      width: 36px;
+      height: 36px;
+      background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple));
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.25rem;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+    }
+
+    .nav-links a {
+      color: var(--text-secondary);
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover {
+      color: var(--text-primary);
+    }
+
+    .nav-links .github-link {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.5rem 1rem;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+    }
+
+    .nav-links .github-link:hover {
+      background: var(--bg-hover);
+      border-color: var(--text-muted);
+    }
+
+    /* Hero Section */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 6rem 2rem 4rem;
+      text-align: center;
+    }
+
+    .hero-content {
+      max-width: 800px;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.5rem 1rem;
+      background: rgba(88, 166, 255, 0.1);
+      border: 1px solid rgba(88, 166, 255, 0.3);
+      border-radius: 100px;
+      font-size: 0.85rem;
+      color: var(--accent-blue);
+      margin-bottom: 2rem;
+    }
+
+    .hero h1 {
+      font-size: 4rem;
+      font-weight: 700;
+      line-height: 1.1;
+      margin-bottom: 1.5rem;
+      background: linear-gradient(135deg, var(--text-primary) 0%, var(--text-secondary) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero h1 span {
+      background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero p {
+      font-size: 1.25rem;
+      color: var(--text-secondary);
+      margin-bottom: 2.5rem;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .hero-buttons {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.875rem 1.75rem;
+      border-radius: 10px;
+      font-size: 1rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.2s;
+      cursor: pointer;
+      border: none;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple));
+      color: white;
+      box-shadow: 0 4px 20px rgba(88, 166, 255, 0.3);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 30px rgba(88, 166, 255, 0.4);
+    }
+
+    .btn-secondary {
+      background: var(--bg-card);
+      color: var(--text-primary);
+      border: 1px solid var(--border);
+    }
+
+    .btn-secondary:hover {
+      background: var(--bg-hover);
+      border-color: var(--text-muted);
+    }
+
+    /* Terminal */
+    .terminal {
+      margin-top: 4rem;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      overflow: hidden;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+    }
+
+    .terminal-header {
+      background: var(--bg-dark);
+      padding: 1rem 1.25rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .terminal-dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+    }
+
+    .terminal-dot.red { background: #ff5f56; }
+    .terminal-dot.yellow { background: #ffbd2e; }
+    .terminal-dot.green { background: #27c93f; }
+
+    .terminal-title {
+      margin-left: 1rem;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+
+    .terminal-body {
+      padding: 1.5rem;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.9rem;
+    }
+
+    .terminal-line {
+      display: flex;
+      gap: 0.75rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .terminal-prompt {
+      color: var(--accent-green);
+    }
+
+    .terminal-command {
+      color: var(--text-primary);
+    }
+
+    .terminal-output {
+      color: var(--text-secondary);
+      padding-left: 1.5rem;
+    }
+
+    .terminal-output.success {
+      color: var(--accent-green);
+    }
+
+    /* Stats */
+    .stats {
+      display: flex;
+      justify-content: center;
+      gap: 3rem;
+      margin-top: 4rem;
+      flex-wrap: wrap;
+    }
+
+    .stat-item {
+      text-align: center;
+    }
+
+    .stat-value {
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--text-primary);
+    }
+
+    .stat-label {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+
+    /* Features Section */
+    .features {
+      padding: 6rem 2rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .section-header {
+      text-align: center;
+      margin-bottom: 4rem;
+    }
+
+    .section-header h2 {
+      font-size: 2.5rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+    }
+
+    .section-header p {
+      color: var(--text-secondary);
+      font-size: 1.1rem;
+      max-width: 500px;
+      margin: 0 auto;
+    }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .feature-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 2rem;
+      transition: all 0.3s;
+    }
+
+    .feature-card:hover {
+      transform: translateY(-4px);
+      border-color: var(--accent-blue);
+      box-shadow: 0 12px 40px rgba(88, 166, 255, 0.1);
+    }
+
+    .feature-icon {
+      width: 56px;
+      height: 56px;
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .feature-icon.blue {
+      background: rgba(88, 166, 255, 0.15);
+      color: var(--accent-blue);
+    }
+
+    .feature-icon.green {
+      background: rgba(63, 185, 80, 0.15);
+      color: var(--accent-green);
+    }
+
+    .feature-icon.purple {
+      background: rgba(163, 113, 247, 0.15);
+      color: var(--accent-purple);
+    }
+
+    .feature-icon.orange {
+      background: rgba(240, 136, 62, 0.15);
+      color: var(--accent-orange);
+    }
+
+    .feature-icon.pink {
+      background: rgba(219, 97, 162, 0.15);
+      color: var(--accent-pink);
+    }
+
+    .feature-card h3 {
+      font-size: 1.25rem;
+      font-weight: 600;
+      margin-bottom: 0.75rem;
+    }
+
+    .feature-card p {
+      color: var(--text-secondary);
+      font-size: 0.95rem;
+    }
+
+    /* Installation Section */
+    .installation {
+      padding: 6rem 2rem;
+      background: var(--bg-card);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .install-container {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .install-method {
+      background: var(--bg-dark);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 2rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .install-method h3 {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      font-size: 1.25rem;
+      font-weight: 600;
+      margin-bottom: 1rem;
+    }
+
+    .install-method h3 i {
+      color: var(--accent-blue);
+    }
+
+    .install-code {
+      background: #0d1117;
+      border-radius: 10px;
+      padding: 1.25rem;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.9rem;
+      overflow-x: auto;
+    }
+
+    .install-code .prompt {
+      color: var(--accent-green);
+      margin-right: 0.75rem;
+    }
+
+    .install-code .comment {
+      color: var(--text-muted);
+    }
+
+    /* Commands Section */
+    .commands {
+      padding: 6rem 2rem;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    .commands-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+      gap: 2rem;
+    }
+
+    .command-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      overflow: hidden;
+    }
+
+    .command-card-header {
+      background: var(--bg-dark);
+      padding: 1.25rem 1.5rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .command-card-header h3 {
+      font-size: 1.1rem;
+      font-weight: 600;
+    }
+
+    .command-card-body {
+      padding: 1.5rem;
+    }
+
+    .command-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+      padding: 0.75rem 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .command-item:last-child {
+      border-bottom: none;
+    }
+
+    .command-item code {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.85rem;
+      color: var(--accent-blue);
+      background: rgba(88, 166, 255, 0.1);
+      padding: 0.25rem 0.5rem;
+      border-radius: 6px;
+      white-space: nowrap;
+    }
+
+    .command-item span {
+      color: var(--text-secondary);
+      font-size: 0.9rem;
+    }
+
+    /* Footer */
+    footer {
+      padding: 4rem 2rem;
+      text-align: center;
+      border-top: 1px solid var(--border);
+    }
+
+    footer p {
+      color: var(--text-muted);
+      margin-bottom: 0.5rem;
+    }
+
+    footer a {
+      color: var(--text-secondary);
+      text-decoration: none;
+    }
+
+    footer a:hover {
+      color: var(--accent-blue);
+    }
+
+    /* Badges */
+    .badges {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      margin-top: 1.5rem;
+      flex-wrap: wrap;
+    }
+
+    .badges img {
+      border-radius: 6px;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .hero h1 {
+        font-size: 2.5rem;
+      }
+
+      .nav-links {
+        display: none;
+      }
+
+      .stats {
+        gap: 2rem;
+      }
+
+      .commands-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .terminal {
+        margin: 2rem 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="bg-animation"></div>
+
+  <nav>
+    <div class="nav-container">
+      <a href="/" class="logo">
+        <div class="logo-icon">
+          <i class="fas fa-terminal"></i>
+        </div>
+        GitHub Hacker
       </a>
-      <a href="https://pypi.org/project/github-hacker/" target="_blank">
-        <img src="https://img.shields.io/pypi/pyversions/github-hacker.svg" alt="Python versions">
-      </a>
-      <a href="https://github.com/SSBun/GithubHacker/blob/main/LICENSE" target="_blank">
-        <img src="https://img.shields.io/pypi/l/github-hacker.svg" alt="License">
-      </a>
-    </p>
-  </div>
-</div>
+      <div class="nav-links">
+        <a href="#features">Features</a>
+        <a href="#installation">Installation</a>
+        <a href="#commands">Commands</a>
+        <a href="https://github.com/SSBun/GithubHacker" target="_blank" class="github-link">
+          <i class="fab fa-github"></i> Star on GitHub
+        </a>
+      </div>
+    </div>
+  </nav>
 
-<div class="container my-5">
-  <section id="features" class="mb-5">
-    <h2 class="text-center mb-4"><i class="fas fa-star me-2"></i>Features</h2>
-    <div class="row">
-      <div class="col-md-4">
-        <div class="feature-card">
-          <div class="feature-icon"><i class="fas fa-users"></i></div>
-          <h4>Multi-Account Management</h4>
-          <p class="text-muted mb-0">Login, logout, and manage multiple GitHub accounts with ease.</p>
+  <section class="hero">
+    <div class="hero-content">
+      <div class="hero-badge">
+        <i class="fas fa-rocket"></i>
+        v0.3.0 Released
+      </div>
+
+      <h1>Manage Multiple<br><span>GitHub Accounts</span> with Ease</h1>
+
+      <p>A powerful CLI tool for batch operations - star, watch, and fork repositories across all your GitHub accounts instantly.</p>
+
+      <div class="hero-buttons">
+        <a href="#installation" class="btn btn-primary">
+          <i class="fas fa-download"></i> Install Now
+        </a>
+        <a href="https://github.com/SSBun/GithubHacker" target="_blank" class="btn btn-secondary">
+          <i class="fab fa-github"></i> View on GitHub
+        </a>
+      </div>
+
+      <div class="terminal">
+        <div class="terminal-header">
+          <div class="terminal-dot red"></div>
+          <div class="terminal-dot yellow"></div>
+          <div class="terminal-dot green"></div>
+          <span class="terminal-title">Terminal</span>
+        </div>
+        <div class="terminal-body">
+          <div class="terminal-line">
+            <span class="terminal-prompt">$</span>
+            <span class="terminal-command">github-hacker login myaccount ghp_xxxxxxxxxxxx</span>
+          </div>
+          <div class="terminal-line terminal-output success">
+            <i class="fas fa-check-circle"></i>&nbsp; Logged in as ssbun (alias: myaccount)
+          </div>
+          <div class="terminal-line">
+            <span class="terminal-prompt">$</span>
+            <span class="terminal-command">github-hacker star fastapi/typer</span>
+          </div>
+          <div class="terminal-line terminal-output">
+            Starring fastapi/typer with 2 account(s)...
+          </div>
+          <div class="terminal-line terminal-output success">
+            <i class="fas fa-check"></i>&nbsp; ssbun: Starred successfully
+          </div>
+          <div class="terminal-line terminal-output success">
+            <i class="fas fa-check"></i>&nbsp; myaccount: Starred successfully
+          </div>
         </div>
       </div>
-      <div class="col-md-4">
-        <div class="feature-card">
-          <div class="feature-icon"><i class="fas fa-bolt"></i></div>
-          <h4>Batch Operations</h4>
-          <p class="text-muted mb-0">Perform operations with all accounts at once - star, watch, fork repositories.</p>
+
+      <div class="stats">
+        <div class="stat-item">
+          <div class="stat-value">6+</div>
+          <div class="stat-label">Commands</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-value">∞</div>
+          <div class="stat-label">Accounts</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-value">100%</div>
+          <div class="stat-label">Open Source</div>
         </div>
       </div>
-      <div class="col-md-4">
-        <div class="feature-card">
-          <div class="feature-icon"><i class="fas fa-download"></i></div>
-          <h4>Easy Installation</h4>
-          <p class="text-muted mb-0">Install via pip, pipx, or build from source. Works on all platforms.</p>
+
+      <div class="badges">
+        <a href="https://pypi.org/project/github-hacker/" target="_blank">
+          <img src="https://img.shields.io/pypi/v/github-hacker?color=blue" alt="PyPI">
+        </a>
+        <a href="https://pypi.org/project/github-hacker/" target="_blank">
+          <img src="https://img.shields.io/pypi/pyversions/github-hacker" alt="Python">
+        </a>
+        <a href="https://github.com/SSBun/GithubHacker/blob/main/LICENSE" target="_blank">
+          <img src="https://img.shields.io/pypi/l/github-hacker" alt="License">
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="features" id="features">
+    <div class="section-header">
+      <h2>Powerful Features</h2>
+      <p>Everything you need to manage multiple GitHub accounts efficiently</p>
+    </div>
+
+    <div class="features-grid">
+      <div class="feature-card">
+        <div class="feature-icon blue">
+          <i class="fas fa-users"></i>
+        </div>
+        <h3>Multi-Account Management</h3>
+        <p>Login, logout, and manage unlimited GitHub accounts. Switch between accounts effortlessly.</p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon green">
+          <i class="fas fa-bolt"></i>
+        </div>
+        <h3>Batch Operations</h3>
+        <p>Perform operations with all accounts simultaneously. Save time with parallel execution.</p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon purple">
+          <i class="fas fa-heart"></i>
+        </div>
+        <h3>Star / Unstar</h3>
+        <p>Star or unstar repositories across all your accounts with a single command.</p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon orange">
+          <i class="fas fa-eye"></i>
+        </div>
+        <h3>Watch / Unwatch</h3>
+        <p>Subscribe or unsubscribe from repository notifications across all accounts.</p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon pink">
+          <i class="fas fa-code-branch"></i>
+        </div>
+        <h3>Fork Repositories</h3>
+        <p>Fork any repository to all your accounts instantly with one command.</p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon blue">
+          <i class="fas fa-download"></i>
+        </div>
+        <h3>Easy Installation</h3>
+        <p>Install via pip, pipx, or build from source. Works seamlessly on all platforms.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="installation" id="installation">
+    <div class="install-container">
+      <div class="section-header">
+        <h2>Installation</h2>
+        <p>Get started in seconds</p>
+      </div>
+
+      <div class="install-method">
+        <h3><i class="fab fa-python"></i> Install with pip</h3>
+        <div class="install-code">
+          <span class="prompt">$</span> pip install github-hacker
         </div>
       </div>
-      <div class="col-md-4">
-        <div class="feature-card">
-          <div class="feature-icon"><i class="fas fa-heart"></i></div>
-          <h4>Star/Unstar</h4>
-          <p class="text-muted mb-0">Star or unstar repositories with one or all accounts.</p>
+
+      <div class="install-method">
+        <h3><i class="fas fa-box"></i> Install with pipx</h3>
+        <div class="install-code">
+          <span class="prompt">$</span> pipx install github-hacker
         </div>
       </div>
-      <div class="col-md-4">
-        <div class="feature-card">
-          <div class="feature-icon"><i class="fas fa-eye"></i></div>
-          <h4>Watch/Unwatch</h4>
-          <p class="text-muted mb-0">Subscribe or unsubscribe from repository notifications.</p>
-        </div>
-      </div>
-      <div class="col-md-4">
-        <div class="feature-card">
-          <div class="feature-icon"><i class="fas fa-code-branch"></i></div>
-          <h4>Fork</h4>
-          <p class="text-muted mb-0">Fork repositories to all your accounts instantly.</p>
+
+      <div class="install-method">
+        <h3><i class="fab fa-github"></i> Install from source</h3>
+        <div class="install-code">
+          <span class="prompt">$</span> git clone https://github.com/SSBun/GithubHacker.git<br>
+          <span class="prompt">$</span> cd GithubHacker<br>
+          <span class="prompt">$</span> pip install -e .
         </div>
       </div>
     </div>
   </section>
 
-  <section id="installation" class="mb-5">
-    <h2 class="text-center mb-4"><i class="fas fa-download me-2"></i>Installation</h2>
+  <section class="commands" id="commands">
+    <div class="section-header">
+      <h2>Commands</h2>
+      <p>Full command reference</p>
+    </div>
 
-    <div class="row justify-content-center">
-      <div class="col-lg-8">
-        <div class="mb-4">
-          <h4><i class="fab fa-pypi me-2"></i>Install with pip (Recommended)</h4>
-          <div class="command-block mt-3">
-            <span class="prompt">$</span> pip install github-hacker
+    <div class="commands-grid">
+      <div class="command-card">
+        <div class="command-card-header">
+          <h3><i class="fas fa-user-plus me-2"></i>Account Management</h3>
+        </div>
+        <div class="command-card-body">
+          <div class="command-item">
+            <code>login &lt;name&gt; &lt;token&gt;</code>
+            <span>Add a GitHub account</span>
+          </div>
+          <div class="command-item">
+            <code>logout &lt;name&gt;</code>
+            <span>Remove a GitHub account</span>
+          </div>
+          <div class="command-item">
+            <code>config list</code>
+            <span>List all saved accounts</span>
+          </div>
+          <div class="command-item">
+            <code>config export &lt;file&gt;</code>
+            <span>Export accounts to JSON</span>
+          </div>
+          <div class="command-item">
+            <code>config import &lt;file&gt;</code>
+            <span>Import accounts from JSON</span>
           </div>
         </div>
+      </div>
 
-        <div class="mb-4">
-          <h4><i class="fas fa-box me-2"></i>Install with pipx</h4>
-          <div class="command-block mt-3">
-            <span class="prompt">$</span> pipx install github-hacker
-          </div>
+      <div class="command-card">
+        <div class="command-card-header">
+          <h3><i class="fas fa-folder me-2"></i>Repository Operations</h3>
         </div>
-
-        <div class="mb-4">
-          <h4><i class="fab fa-github me-2"></i>Install from source</h4>
-          <div class="command-block mt-3">
-            <span class="prompt">$</span> git clone https://github.com/SSBun/GithubHacker.git<br>
-            <span class="prompt">$</span> cd GithubHacker<br>
-            <span class="prompt">$</span> pip install -e .
+        <div class="command-card-body">
+          <div class="command-item">
+            <code>star &lt;repo&gt;</code>
+            <span>Star a repository</span>
+          </div>
+          <div class="command-item">
+            <code>unstar &lt;repo&gt;</code>
+            <span>Unstar a repository</span>
+          </div>
+          <div class="command-item">
+            <code>watch &lt;repo&gt;</code>
+            <span>Watch a repository</span>
+          </div>
+          <div class="command-item">
+            <code>unwatch &lt;repo&gt;</code>
+            <span>Unwatch a repository</span>
+          </div>
+          <div class="command-item">
+            <code>fork &lt;repo&gt;</code>
+            <span>Fork a repository</span>
+          </div>
+          <div class="command-item">
+            <code>status &lt;repo&gt;</code>
+            <span>Check star/watch status</span>
+          </div>
+          <div class="command-item">
+            <code>info &lt;repo&gt;</code>
+            <span>Show repository info</span>
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <section id="usage" class="mb-5">
-    <h2 class="text-center mb-4"><i class="fas fa-terminal me-2"></i>Quick Start</h2>
+  <footer>
+    <p>Built with <i class="fas fa-heart" style="color: var(--accent-pink);"></i> by <a href="https://github.com/SSBun">SSBun</a></p>
+    <p>Open Source under <a href="https://github.com/SSBun/GithubHacker/blob/main/LICENSE">MIT License</a></p>
+  </footer>
 
-    <div class="row justify-content-center">
-      <div class="col-lg-8">
-        <div class="mb-4">
-          <h4>Login with GitHub Account</h4>
-          <div class="command-block mt-3">
-            <span class="prompt">$</span> github-hacker login <span class="string">myaccount</span> <span class="string">YOUR_GITHUB_TOKEN</span>
-          </div>
-        </div>
-
-        <div class="mb-4">
-          <h4>List Accounts</h4>
-          <div class="command-block mt-3">
-            <span class="prompt">$</span> github-hacker config list
-          </div>
-        </div>
-
-        <div class="mb-4">
-          <h4>Star a Repository (All Accounts)</h4>
-          <div class="command-block mt-3">
-            <span class="prompt">$</span> github-hacker star <span class="string">owner/repo</span><br>
-            <span class="comment"># Or use full URL</span><br>
-            <span class="prompt">$</span> github-hacker star <span class="string">https://github.com/owner/repo</span>
-          </div>
-        </div>
-
-        <div class="mb-4">
-          <h4>Star with Specific Account</h4>
-          <div class="command-block mt-3">
-            <span class="prompt">$</span> github-hacker star <span class="string">owner/repo</span> -a <span class="string">myaccount</span>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section id="commands" class="mb-5">
-    <h2 class="text-center mb-4"><i class="fas fa-list me-2"></i>All Commands</h2>
-
-    <div class="row justify-content-center">
-      <div class="col-lg-8">
-        <div class="card">
-          <div class="card-body">
-            <h5 class="card-title">Account Management</h5>
-            <div class="command-block mt-2">
-              <span class="comment"># Add account</span><br>
-              github-hacker login &lt;name&gt; &lt;token&gt;<br><br>
-              <span class="comment"># Remove account</span><br>
-              github-hacker logout &lt;name&gt;<br><br>
-              <span class="comment"># List accounts</span><br>
-              github-hacker config list<br><br>
-              <span class="comment"># Export accounts</span><br>
-              github-hacker config export accounts.json<br><br>
-              <span class="comment"># Import accounts</span><br>
-              github-hacker config import accounts.json
-            </div>
-          </div>
-        </div>
-
-        <div class="card mt-4">
-          <div class="card-body">
-            <h5 class="card-title">Repository Operations</h5>
-            <div class="command-block mt-2">
-              <span class="comment"># Star a repository</span><br>
-              github-hacker star &lt;repo&gt;<br><br>
-              <span class="comment"># Unstar a repository</span><br>
-              github-hacker unstar &lt;repo&gt;<br><br>
-              <span class="comment"># Watch a repository</span><br>
-              github-hacker watch &lt;repo&gt;<br><br>
-              <span class="comment"># Unwatch a repository</span><br>
-              github-hacker unwatch &lt;repo&gt;<br><br>
-              <span class="comment"># Fork a repository</span><br>
-              github-hacker fork &lt;repo&gt;<br><br>
-              <span class="comment"># Check status</span><br>
-              github-hacker status &lt;repo&gt;<br><br>
-              <span class="comment"># Show repository info</span><br>
-              github-hacker info &lt;repo&gt;
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="text-center mb-5">
-    <h2 class="mb-4"><i class="fas fa-rocket me-2"></i>Get Started Now</h2>
-    <p class="lead text-muted mb-4">Install GitHub Hacker and manage multiple GitHub accounts with ease.</p>
-    <div class="command-block d-inline-block">
-      <span class="prompt">$</span> pip install github-hacker
-    </div>
-  </section>
-</div>
+  <script>
+    // Smooth scroll for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start'
+          });
+        }
+      });
+    });
+  </script>
+</body>
+</html>

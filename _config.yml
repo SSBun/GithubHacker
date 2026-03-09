@@ -1,6 +1,6 @@
 title: GitHub Hacker
 description: CLI tool to manage multiple GitHub accounts for batch operations like starring, watching, and forking repositories.
-baseurl: ""
+baseurl: "/GithubHacker"
 url: "https://ssbun.github.io"
 
 # Build settings
