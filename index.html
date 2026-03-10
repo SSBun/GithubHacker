@@ -23,6 +23,21 @@
       --accent-purple: #a371f7;
       --accent-orange: #f0883e;
       --accent-pink: #db61a2;
+
+      /* Animation timing */
+      --ease-out-quart: cubic-bezier(0.25, 1, 0.5, 1);
+      --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    /* Reduced motion support */
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
     }
 
     * {
@@ -81,6 +96,12 @@
       border-bottom: 1px solid var(--border);
       z-index: 1000;
       padding: 1rem 0;
+      transform: translateY(-100%);
+      animation: navSlideDown 0.6s var(--ease-out-expo) 0.2s forwards;
+    }
+
+    @keyframes navSlideDown {
+      to { transform: translateY(0); }
     }
 
     .nav-container {
@@ -111,6 +132,12 @@
       align-items: center;
       justify-content: center;
       font-size: 1.25rem;
+      animation: logoFloat 3s ease-in-out infinite;
+    }
+
+    @keyframes logoFloat {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-3px); }
     }
 
     .nav-links {
@@ -124,11 +151,13 @@
       text-decoration: none;
       font-size: 0.9rem;
       font-weight: 500;
-      transition: color 0.2s;
+      transition: color 0.2s, transform 0.2s;
+      display: inline-block;
     }
 
     .nav-links a:hover {
       color: var(--text-primary);
+      transform: translateY(-1px);
     }
 
     .nav-links .github-link {
@@ -139,11 +168,13 @@
       background: var(--bg-card);
       border: 1px solid var(--border);
       border-radius: 8px;
+      transition: all 0.25s var(--ease-out-quart);
     }
 
     .nav-links .github-link:hover {
       background: var(--bg-hover);
       border-color: var(--text-muted);
+      transform: translateY(-2px);
     }
 
     /* Hero Section */
@@ -160,6 +191,7 @@
       max-width: 800px;
     }
 
+    /* Hero entrance animations */
     .hero-badge {
       display: inline-flex;
       align-items: center;
@@ -171,6 +203,61 @@
       font-size: 0.85rem;
       color: var(--accent-blue);
       margin-bottom: 2rem;
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeSlideUp 0.6s var(--ease-out-expo) 0.4s forwards, badgePulse 3s ease-in-out 2s infinite;
+    }
+
+    @keyframes badgePulse {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(88, 166, 255, 0.4); }
+      50% { box-shadow: 0 0 0 8px rgba(88, 166, 255, 0); }
+    }
+
+    .hero h1 {
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeSlideUp 0.6s var(--ease-out-expo) 0.5s forwards;
+    }
+
+    .hero > .hero-content > p {
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeSlideUp 0.6s var(--ease-out-expo) 0.6s forwards;
+    }
+
+    .hero-buttons {
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeSlideUp 0.6s var(--ease-out-expo) 0.7s forwards;
+    }
+
+    .terminal {
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeSlideUp 0.6s var(--ease-out-expo) 0.9s forwards;
+    }
+
+    .stats {
+      opacity: 0;
+      animation: fadeIn 0.6s var(--ease-out-expo) 1.2s forwards;
+    }
+
+    .badges {
+      opacity: 0;
+      animation: fadeIn 0.6s var(--ease-out-expo) 1.3s forwards;
+    }
+
+    @keyframes fadeSlideUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes fadeIn {
+      to {
+        opacity: 1;
+      }
     }
 
     .hero h1 {
@@ -216,9 +303,28 @@
       font-size: 1rem;
       font-weight: 600;
       text-decoration: none;
-      transition: all 0.2s;
+      transition: all 0.25s var(--ease-out-quart);
       cursor: pointer;
       border: none;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .btn::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: white;
+      opacity: 0;
+      transition: opacity 0.25s;
+    }
+
+    .btn:active::after {
+      opacity: 0.1;
+    }
+
+    .btn:active {
+      transform: scale(0.97);
     }
 
     .btn-primary {
@@ -228,8 +334,8 @@
     }
 
     .btn-primary:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 6px 30px rgba(88, 166, 255, 0.4);
+      transform: translateY(-3px);
+      box-shadow: 0 8px 35px rgba(88, 166, 255, 0.45);
     }
 
     .btn-secondary {
@@ -241,6 +347,7 @@
     .btn-secondary:hover {
       background: var(--bg-hover);
       border-color: var(--text-muted);
+      transform: translateY(-2px);
     }
 
     /* Terminal */
@@ -291,6 +398,14 @@
       display: flex;
       gap: 0.75rem;
       margin-bottom: 0.75rem;
+      opacity: 0;
+      transform: translateX(-10px);
+    }
+
+    .terminal-line.typed {
+      opacity: 1;
+      transform: translateX(0);
+      transition: all 0.3s var(--ease-out-quart);
     }
 
     .terminal-prompt {
@@ -304,10 +419,30 @@
     .terminal-output {
       color: var(--text-secondary);
       padding-left: 1.5rem;
+      opacity: 0;
+      animation: terminalFadeIn 0.3s var(--ease-out-quart) forwards;
     }
 
     .terminal-output.success {
       color: var(--accent-green);
+    }
+
+    @keyframes terminalFadeIn {
+      to { opacity: 1; }
+    }
+
+    .cursor-blink {
+      display: inline-block;
+      width: 8px;
+      height: 1.2em;
+      background: var(--text-primary);
+      margin-left: 2px;
+      animation: cursorBlink 1s step-end infinite;
+      vertical-align: text-bottom;
+    }
+
+    @keyframes cursorBlink {
+      50% { opacity: 0; }
     }
 
     /* Stats */
@@ -344,6 +479,14 @@
     .section-header {
       text-align: center;
       margin-bottom: 4rem;
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all 0.6s var(--ease-out-expo);
+    }
+
+    .section-header.visible {
+      opacity: 1;
+      transform: translateY(0);
     }
 
     .section-header h2 {
@@ -370,13 +513,28 @@
       border: 1px solid var(--border);
       border-radius: 16px;
       padding: 2rem;
-      transition: all 0.3s;
+      transition: all 0.3s var(--ease-out-quart);
+      opacity: 0;
+      transform: translateY(30px);
+    }
+
+    .feature-card.visible {
+      opacity: 1;
+      transform: translateY(0);
     }
 
     .feature-card:hover {
-      transform: translateY(-4px);
+      transform: translateY(-6px);
       border-color: var(--accent-blue);
-      box-shadow: 0 12px 40px rgba(88, 166, 255, 0.1);
+      box-shadow: 0 16px 50px rgba(88, 166, 255, 0.15);
+    }
+
+    .feature-icon {
+      transition: transform 0.3s var(--ease-out-quart);
+    }
+
+    .feature-card:hover .feature-icon {
+      transform: scale(1.1) rotate(3deg);
     }
 
     .feature-icon {
@@ -445,6 +603,14 @@
       border-radius: 16px;
       padding: 2rem;
       margin-bottom: 1.5rem;
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all 0.5s var(--ease-out-expo);
+    }
+
+    .install-method.visible {
+      opacity: 1;
+      transform: translateY(0);
     }
 
     .install-method h3 {
@@ -496,6 +662,19 @@
       border: 1px solid var(--border);
       border-radius: 16px;
       overflow: hidden;
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all 0.5s var(--ease-out-expo);
+    }
+
+    .command-card.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .command-card:hover {
+      border-color: var(--accent-purple);
+      box-shadow: 0 8px 30px rgba(163, 113, 247, 0.1);
     }
 
     .command-card-header {
@@ -650,14 +829,14 @@
         <div class="terminal-body">
           <div class="terminal-line">
             <span class="terminal-prompt">$</span>
-            <span class="terminal-command">github-hacker login myaccount ghp_xxxxxxxxxxxx</span>
+            <span class="terminal-command">github-hacker login myaccount ghp_xxxx<span class="cursor-blink"></span></span>
           </div>
           <div class="terminal-line terminal-output success">
             <i class="fas fa-check-circle"></i>&nbsp; Logged in as ssbun (alias: myaccount)
           </div>
           <div class="terminal-line">
             <span class="terminal-prompt">$</span>
-            <span class="terminal-command">github-hacker star fastapi/typer</span>
+            <span class="terminal-command">github-hacker star fastapi/typer<span class="cursor-blink"></span></span>
           </div>
           <div class="terminal-line terminal-output">
             Starring fastapi/typer with 2 account(s)...
@@ -880,6 +1059,84 @@
           });
         }
       });
+    });
+
+    // Intersection Observer for scroll-triggered animations
+    const observerOptions = {
+      root: null,
+      rootMargin: '0px',
+      threshold: 0.1
+    };
+
+    const animateOnScroll = new IntersectionObserver((entries) => {
+      entries.forEach((entry, index) => {
+        if (entry.isIntersecting) {
+          // Add delay based on index for stagger effect
+          setTimeout(() => {
+            entry.target.classList.add('visible');
+          }, index * 100);
+          animateOnScroll.unobserve(entry.target);
+        }
+      });
+    }, observerOptions);
+
+    // Observe elements
+    document.querySelectorAll('.feature-card, .section-header, .install-method, .command-card').forEach(el => {
+      animateOnScroll.observe(el);
+    });
+
+    // Terminal typing effect
+    async function typeTerminal() {
+      const terminalLines = document.querySelectorAll('.terminal-line');
+      const delays = [500, 1200, 1800, 2500, 3200, 3800];
+
+      for (let i = 0; i < terminalLines.length; i++) {
+        await new Promise(resolve => setTimeout(resolve, delays[i] || 400));
+        terminalLines[i].classList.add('typed');
+      }
+    }
+
+    // Start terminal animation after page load
+    window.addEventListener('load', () => {
+      setTimeout(typeTerminal, 1200);
+    });
+
+    // Stats counter animation
+    const statsObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const statValue = entry.target.querySelector('.stat-value');
+          const finalValue = statValue.textContent;
+          if (finalValue === '∞') return; // Skip infinity
+
+          const isPercentage = finalValue.includes('%');
+          const isPlus = finalValue.includes('+');
+          let num = parseFloat(finalValue.replace(/[+%]/g, ''));
+
+          statValue.textContent = '0' + (isPercentage ? '%' : '') + (isPlus ? '+' : '');
+          statValue.dataset.target = num;
+
+          let current = 0;
+          const increment = num / 50;
+          const duration = 1500;
+          const stepTime = duration / 50;
+
+          const counter = setInterval(() => {
+            current += increment;
+            if (current >= num) {
+              current = num;
+              clearInterval(counter);
+            }
+            statValue.textContent = Math.floor(current) + (isPercentage ? '%' : '') + (isPlus ? '+' : '');
+          }, stepTime);
+
+          statsObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.5 });
+
+    document.querySelectorAll('.stat-item').forEach(stat => {
+      statsObserver.observe(stat);
     });
   </script>
 </body>
