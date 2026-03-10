@@ -140,6 +140,20 @@
       50% { transform: translateY(-3px); }
     }
 
+    /* Logo glitch effect on hover */
+    .logo:hover .logo-icon {
+      animation: logoGlitch 0.3s var(--ease-out-quart);
+    }
+
+    @keyframes logoGlitch {
+      0% { transform: translate(0); filter: hue-rotate(0deg); }
+      20% { transform: translate(-2px, 1px); filter: hue-rotate(90deg); }
+      40% { transform: translate(2px, -1px); filter: hue-rotate(180deg); }
+      60% { transform: translate(-1px, 2px); filter: hue-rotate(270deg); }
+      80% { transform: translate(1px, -2px); filter: hue-rotate(360deg); }
+      100% { transform: translate(0); filter: hue-rotate(0deg); }
+    }
+
     .nav-links {
       display: flex;
       align-items: center;
@@ -445,6 +459,49 @@
       50% { opacity: 0; }
     }
 
+    /* Matrix mode - activated via Konami code */
+    .matrix-mode .bg-animation::before {
+      background:
+        radial-gradient(ellipse at 20% 20%, rgba(88, 166, 255, 0.15) 0%, transparent 50%),
+        radial-gradient(ellipse at 80% 80%, rgba(163, 113, 247, 0.15) 0%, transparent 50%),
+        radial-gradient(ellipse at 40% 60%, rgba(63, 185, 80, 0.1) 0%, transparent 40%),
+        linear-gradient(180deg, transparent 0%, rgba(0, 255, 0, 0.03) 50%, transparent 100%);
+      animation: matrixRain 20s linear infinite;
+    }
+
+    @keyframes matrixRain {
+      0% { background-position: 0 0; }
+      100% { background-position: 0 100%; }
+    }
+
+    .matrix-mode .hero h1,
+    .matrix-mode .hero h1 span {
+      background: linear-gradient(135deg, #00ff00, #00ff00);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      text-shadow: 0 0 30px rgba(0, 255, 0, 0.5);
+      animation: textGlitch 2s infinite;
+    }
+
+    @keyframes textGlitch {
+      0%, 90%, 100% { transform: translate(0); }
+      92% { transform: translate(-2px, 1px); }
+      94% { transform: translate(2px, -1px); }
+      96% { transform: translate(-1px, -1px); }
+      98% { transform: translate(1px, 1px); }
+    }
+
+    .matrix-mode .logo-icon {
+      background: linear-gradient(135deg, #00ff00, #00ff00);
+      animation: iconPulse 1s ease-in-out infinite;
+    }
+
+    @keyframes iconPulse {
+      0%, 100% { box-shadow: 0 0 10px rgba(0, 255, 0, 0.5); }
+      50% { box-shadow: 0 0 25px rgba(0, 255, 0, 0.8); }
+    }
+
     /* Stats */
     .stats {
       display: flex;
@@ -536,6 +593,14 @@
     .feature-card:hover .feature-icon {
       transform: scale(1.1) rotate(3deg);
     }
+
+    /* Feature icon sparkle effect */
+    .feature-card:nth-child(1):hover .feature-icon { background: rgba(88, 166, 255, 0.25); box-shadow: 0 0 20px rgba(88, 166, 255, 0.4); }
+    .feature-card:nth-child(2):hover .feature-icon { background: rgba(63, 185, 80, 0.25); box-shadow: 0 0 20px rgba(63, 185, 80, 0.4); }
+    .feature-card:nth-child(3):hover .feature-icon { background: rgba(163, 113, 247, 0.25); box-shadow: 0 0 20px rgba(163, 113, 247, 0.4); }
+    .feature-card:nth-child(4):hover .feature-icon { background: rgba(240, 136, 62, 0.25); box-shadow: 0 0 20px rgba(240, 136, 62, 0.4); }
+    .feature-card:nth-child(5):hover .feature-icon { background: rgba(219, 97, 162, 0.25); box-shadow: 0 0 20px rgba(219, 97, 162, 0.4); }
+    .feature-card:nth-child(6):hover .feature-icon { background: rgba(88, 166, 255, 0.25); box-shadow: 0 0 20px rgba(88, 166, 255, 0.4); }
 
     .feature-icon {
       width: 56px;
@@ -644,6 +709,16 @@
       color: var(--text-muted);
     }
 
+    /* Install code delight - hover glow */
+    .install-code {
+      position: relative;
+      transition: box-shadow 0.3s var(--ease-out-quart);
+    }
+
+    .install-code:hover {
+      box-shadow: 0 0 20px rgba(88, 166, 255, 0.15);
+    }
+
     /* Commands Section */
     .commands {
       padding: 6rem 2rem;
@@ -738,6 +813,23 @@
 
     footer a:hover {
       color: var(--accent-blue);
+    }
+
+    /* Footer delight - heart beat on hover */
+    footer .fa-heart {
+      transition: transform 0.3s var(--ease-out-quart);
+      display: inline-block;
+    }
+
+    footer:hover .fa-heart {
+      animation: heartBeat 1s ease-in-out infinite;
+    }
+
+    @keyframes heartBeat {
+      0%, 100% { transform: scale(1); }
+      25% { transform: scale(1.2); }
+      50% { transform: scale(1); }
+      75% { transform: scale(1.15); }
     }
 
     /* Badges */
@@ -1138,6 +1230,47 @@
     document.querySelectorAll('.stat-item').forEach(stat => {
       statsObserver.observe(stat);
     });
+
+    // Easter egg: Console message for developers
+    const consoleMessages = [
+      '%c👋 Hey, hacker! Found the secret spot.',
+      'color: #58a6ff; font-size: 14px; font-family: JetBrains Mono, monospace;',
+      '%c🔓 You\'ve unlocked the developer console. Want to contribute? https://github.com/SSBun/GithubHacker',
+      'color: #3fb950; font-size: 12px; font-family: JetBrains Mono, monospace;',
+      '%c💡 Pro tip: This tool was made with ❤️ by SSBun',
+      'color: #a371f7; font-size: 11px; font-family: JetBrains Mono, monospace;'
+    ];
+    console.log(...consoleMessages);
+
+    // Konami code easter egg
+    const konamiCode = ['ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight', 'Keyb', 'Enter'];
+    let konamiIndex = 0;
+    document.addEventListener('keydown', (e) => {
+      if (e.code === konamiCode[konamiIndex]) {
+        konamiIndex++;
+        if (konamiIndex === konamiCode.length) {
+          document.body.classList.add('matrix-mode');
+          console.log('%c🌴 KONAMI CODE ACTIVATED! Matrix mode engaged.', 'color: #3fb950; font-size: 16px; font-weight: bold;');
+          konamiIndex = 0;
+        }
+      } else {
+        konamiIndex = 0;
+      }
+    });
+
+    // Hacker tips rotation
+    const hackerTips = [
+      '💡 Pro tip: Use aliases for faster access!',
+      '🔒 Tip: Keep your tokens secure!',
+      '⚡ Tip: Batch operations save time!',
+      '🎯 Tip: Star your favorite repos across all accounts!',
+      '🚀 Tip: Export/import accounts to sync across machines!'
+    ];
+    const randomTip = hackerTips[Math.floor(Math.random() * hackerTips.length)];
+    const tipElement = document.createElement('p');
+    tipElement.style.cssText = 'color: var(--text-muted); font-size: 0.8rem; margin-top: 1rem;';
+    tipElement.textContent = randomTip;
+    document.querySelector('.hero .badges')?.after(tipElement);
   </script>
 </body>
 </html>
