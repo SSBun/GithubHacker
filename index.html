@@ -73,9 +73,10 @@
       width: 200%;
       height: 200%;
       background:
-        radial-gradient(ellipse at 20% 20%, rgba(88, 166, 255, 0.08) 0%, transparent 50%),
-        radial-gradient(ellipse at 80% 80%, rgba(163, 113, 247, 0.08) 0%, transparent 50%),
-        radial-gradient(ellipse at 40% 60%, rgba(63, 185, 80, 0.05) 0%, transparent 40%);
+        radial-gradient(ellipse at 20% 20%, rgba(88, 166, 255, 0.15) 0%, transparent 50%),
+        radial-gradient(ellipse at 80% 80%, rgba(163, 113, 247, 0.12) 0%, transparent 50%),
+        radial-gradient(ellipse at 60% 30%, rgba(219, 97, 162, 0.08) 0%, transparent 40%),
+        radial-gradient(ellipse at 40% 60%, rgba(63, 185, 80, 0.08) 0%, transparent 40%);
       animation: bgPulse 15s ease-in-out infinite;
     }
 
@@ -209,17 +210,19 @@
     .hero-badge {
       display: inline-flex;
       align-items: center;
-      gap: 0.5rem;
-      padding: 0.5rem 1rem;
-      background: rgba(88, 166, 255, 0.1);
-      border: 1px solid rgba(88, 166, 255, 0.3);
+      gap: 0.75rem;
+      padding: 0.75rem 1.5rem;
+      background: linear-gradient(135deg, rgba(88, 166, 255, 0.15), rgba(163, 113, 247, 0.15));
+      border: 1px solid rgba(88, 166, 255, 0.4);
       border-radius: 100px;
-      font-size: 0.85rem;
+      font-size: 0.9rem;
+      font-weight: 600;
       color: var(--accent-blue);
-      margin-bottom: 2rem;
+      margin-bottom: 2.5rem;
       opacity: 0;
       transform: translateY(20px);
       animation: fadeSlideUp 0.6s var(--ease-out-expo) 0.4s forwards, badgePulse 3s ease-in-out 2s infinite;
+      box-shadow: 0 4px 20px rgba(88, 166, 255, 0.2);
     }
 
     @keyframes badgePulse {
@@ -275,30 +278,46 @@
     }
 
     .hero h1 {
-      font-size: 4rem;
-      font-weight: 700;
-      line-height: 1.1;
+      font-size: 5.5rem;
+      font-weight: 800;
+      line-height: 1.05;
       margin-bottom: 1.5rem;
       background: linear-gradient(135deg, var(--text-primary) 0%, var(--text-secondary) 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
+      letter-spacing: -0.03em;
+      text-shadow: 0 0 80px rgba(88, 166, 255, 0.3);
     }
 
     .hero h1 span {
-      background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple));
+      background: linear-gradient(135deg, var(--accent-blue) 0%, var(--accent-purple) 50%, var(--accent-pink) 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
+      position: relative;
+    }
+
+    .hero h1 span::after {
+      content: '';
+      position: absolute;
+      inset: -10% -20% -5% -20%;
+      background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple), var(--accent-pink));
+      filter: blur(30px);
+      opacity: 0.4;
+      z-index: -1;
+      border-radius: 20px;
     }
 
     .hero p {
-      font-size: 1.25rem;
+      font-size: 1.4rem;
+      font-weight: 400;
       color: var(--text-secondary);
       margin-bottom: 2.5rem;
       max-width: 600px;
       margin-left: auto;
       margin-right: auto;
+      line-height: 1.7;
     }
 
     .hero-buttons {
@@ -344,24 +363,29 @@
     .btn-primary {
       background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple));
       color: white;
-      box-shadow: 0 4px 20px rgba(88, 166, 255, 0.3);
+      box-shadow: 0 8px 30px rgba(88, 166, 255, 0.4);
+      padding: 1rem 2.25rem;
+      font-size: 1.1rem;
     }
 
     .btn-primary:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 8px 35px rgba(88, 166, 255, 0.45);
+      transform: translateY(-4px);
+      box-shadow: 0 16px 50px rgba(88, 166, 255, 0.5);
     }
 
     .btn-secondary {
       background: var(--bg-card);
       color: var(--text-primary);
-      border: 1px solid var(--border);
+      border: 2px solid var(--border);
+      padding: 1rem 2.25rem;
+      font-size: 1.1rem;
     }
 
     .btn-secondary:hover {
       background: var(--bg-hover);
       border-color: var(--text-muted);
-      transform: translateY(-2px);
+      transform: translateY(-3px);
+      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3);
     }
 
     /* Terminal */
@@ -374,7 +398,10 @@
       max-width: 600px;
       margin-left: auto;
       margin-right: auto;
-      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+      box-shadow:
+        0 20px 60px rgba(0, 0, 0, 0.4),
+        0 0 40px rgba(88, 166, 255, 0.1),
+        inset 0 1px 0 rgba(255, 255, 255, 0.05);
     }
 
     .terminal-header {
@@ -516,14 +543,17 @@
     }
 
     .stat-value {
-      font-size: 2rem;
-      font-weight: 700;
+      font-size: 3rem;
+      font-weight: 800;
       color: var(--text-primary);
+      letter-spacing: -0.02em;
     }
 
     .stat-label {
-      font-size: 0.85rem;
+      font-size: 0.9rem;
       color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
     }
 
     /* Features Section */
@@ -547,9 +577,10 @@
     }
 
     .section-header h2 {
-      font-size: 2.5rem;
-      font-weight: 700;
+      font-size: 3.5rem;
+      font-weight: 800;
       margin-bottom: 1rem;
+      letter-spacing: -0.02em;
     }
 
     .section-header p {
@@ -568,9 +599,9 @@
     .feature-card {
       background: var(--bg-card);
       border: 1px solid var(--border);
-      border-radius: 16px;
-      padding: 2rem;
-      transition: all 0.3s var(--ease-out-quart);
+      border-radius: 20px;
+      padding: 2.5rem;
+      transition: all 0.35s var(--ease-out-quart);
       opacity: 0;
       transform: translateY(30px);
     }
@@ -603,14 +634,14 @@
     .feature-card:nth-child(6):hover .feature-icon { background: rgba(88, 166, 255, 0.25); box-shadow: 0 0 20px rgba(88, 166, 255, 0.4); }
 
     .feature-icon {
-      width: 56px;
-      height: 56px;
-      border-radius: 14px;
+      width: 72px;
+      height: 72px;
+      border-radius: 18px;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 1.5rem;
-      margin-bottom: 1.5rem;
+      font-size: 1.75rem;
+      margin-bottom: 1.75rem;
     }
 
     .feature-icon.blue {
@@ -848,6 +879,14 @@
     /* Responsive */
     @media (max-width: 768px) {
       .hero h1 {
+        font-size: 3rem;
+      }
+
+      .hero p {
+        font-size: 1.15rem;
+      }
+
+      .section-header h2 {
         font-size: 2.5rem;
       }
 
